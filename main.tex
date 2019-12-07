@@ -22,29 +22,27 @@
 
 \sisetup{output-decimal-marker={.}}
 
-\author{Jakub Skowronski & Alessandro Compagnucci}
+\author{Jakub Skowronski \& Alessandro Compagnucci}
 \title{PROTO Trace}
 
 \begin{document}
-
 
 \maketitle
 
 \section{Introduction}
 
-\section{Physics}
+\input{intro.tex}
 
-\section{Data Acquisition}
+\section{Physical Motivation}
 
-In order to prepare the data acquistion system, the entire electronical chain
-was tested beforehand. In fact it is crucial that the response of each
-electronic device used behaves linearly, as the information about the energy
-of the incident particle must be univocally extracted at the end of the chain.
-To test the PROTO Trace detector, it was put in a vacuum chamber, with a
-$\alpha$-ray source
+\input{phys_mot.tex}
 
-\subsection{PROTO Trace detector}
+\section{GALTrace detector}
 
-\subsection{Electronical Chain}
+\input{trace.tex}
+
+\section{Experimental Setup}
+
+\input{exp_setup.tex}
          
 \end{document}

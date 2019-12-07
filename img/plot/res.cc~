@@ -1,0 +1,57 @@
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <string>
+#include <cmath>
+
+using namespace std;
+
+int main(){
+
+  string buff;
+  string f_in;
+  string f_out;
+  ifstream f_data;
+  ofstream f_res;
+
+  cout << "Enter input file name: ";
+  cin >> f_in;
+  cout << endl;
+
+  cout << "Enter output file name: ";
+  cin >> f_out;
+  cout << endl;
+  
+  f_data.open( f_in );
+  f_res.open( f_out );
+  double data[6];
+
+  double num_buff;
+  int found;
+  int i;
+
+  while( getline( f_data, buff ) ){
+
+    found = buff.find( "channel" );
+
+    if( found == 1 ){
+
+      for( i = 0; i < 6; ++i ){
+
+	f_data >> num_buff;
+	data[i] = num_buff;
+	
+      }
+      
+      f_res << buff << endl;
+      f_res << ( data[1]/data[0] ) * 100 << endl;
+      f_res << ( data[3]/data[2] ) * 100 << endl;
+      f_res << ( data[5]/data[4] ) * 100 << endl;
+      f_res << endl;
+      
+    }
+    
+  }
+  
+  return 0;
+}

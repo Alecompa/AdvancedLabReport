@@ -1,0 +1,4 @@
+data formata in the following files is
+channel		resolution	resolution_error
+
+#channel -1 is the 36 channel (to visualize better plots)

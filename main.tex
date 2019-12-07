@@ -20,15 +20,22 @@
 \usepackage{caption}
 \usepackage{gensymb}
 \usepackage{mhchem}
+\usepackage{afterpage}
 
 \sisetup{output-decimal-marker={.}}
 
 \author{Jakub Skowronski \& Alessandro Compagnucci}
-\title{PROTO Trace}
+\title{GALTRACE: }
 
 \begin{document}
 
 \maketitle
+
+\clearpage
+
+\tableofcontents
+
+\clearpage
 
 \section{Introduction}
 
@@ -42,7 +49,7 @@
 
 \clearpage
 
-\section{GALTrace detector}
+\section{GALTRACE detector}
 
 \input{trace.tex}
 
@@ -51,6 +58,20 @@
 \section{Experimental Setup}
 
 \input{exp_setup.tex}
+
+\clearpage
+
+\section{Data Analysis}
+
+\input{data.tex}
+
+\clearpage
+
+\section{Conclusions}
+
+\input{concl.tex}
+
+\clearpage
 
 \input{biblio.tex}
 

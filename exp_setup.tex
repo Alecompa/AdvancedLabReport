@@ -12,19 +12,22 @@ of the incident particle must be univocally extracted at the end of the chain.
   \label{chain}
 \end{figure}
 
-The setup used is shown in Fig.~\ref{chain}. The output of a pulse generator is fed into a Fan-in Fan-out which reproduces the same signal for 12 channels, this signals are given in input to a single-ended to differential amplifier custom board, in order to do this a cable was made.
-The output of the board as seen from the oscilloscope is shown in Fig.~\ref{osc}.
+The setup used is shown in Fig.~\ref{chain}. The output of a pulse generator (\num{100}ns square pulse of variable amplitude) is fed into a Fan-in Fan-out which reproduces the same signal for 12 channels, this signals are given in input to a single-ended to differential amplifier custom board, in order to do this a cable was made.
+The output of the board as seen from the oscilloscope is shown in Fig.~\ref{osc}. The shape of the rising edge of this signal will be sampled during the acquisition from the detector in order to perform PSA on each event.
 
 
-
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=.35]{img/test_signal_oscilloscope.JPG}
+  \caption{The output signal from the differential amplifier board, as seen on the oscilloscope.}
+  \label{osc}
+\end{figure}
 
 From the board the signal is given to a 100 MHz 14-bit resolution digitizer throught a MDR-26 connector
-At the signal is the applied, with an FPGA, a trapezoidal filter with its charateristics \emph{risetime} and \emph{flat top} width parameters, this step is crucial because because the height of the peak from the differential amplifier board will be directly proportional to the energy of the incident particle in the detector.
+At the signal is the applied, with an FPGA, a trapezoidal filter with its charateristics \emph{risetime} and \emph{flat top} width parameters (Moving Windows Analysis) [INSERT REF. DESCRIBING THIS METHOD], this step is crucial because because the height of the peak from the differential amplifier board will be directly proportional to the energy of the incident particle in the detector.
 The height trapezoidal filter with the right parameters then gives the information on the intensity of the peak available for longer time.
-
-
 
 
 \subsection{Testing the TRACE detector}
 
-To test the PROTO Trace detector, it was put in a vacuum chamber, with a $\alpha$-ray source.
+In order to test the TRACE detector, it was put in a vacuum chamber, with a $\alpha$-ray source.

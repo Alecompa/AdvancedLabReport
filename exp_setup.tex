@@ -24,92 +24,43 @@ The output of the board as seen from the oscilloscope is shown in Fig.~\ref{osc}
 \end{figure}
 
 From the board the signal is given to a 100 MHz 14-bit resolution digitizer throught a MDR-26 connector
-At the signal is the applied, with an FPGA, a trapezoidal filter with its charateristics \emph{risetime} and \emph{flat top} width parameters (Moving Windows Analysis) [INSERT REF. DESCRIBING THIS METHOD], this step is crucial because because the height of the peak from the differential amplifier board will be directly proportional to the energy of the incident particle in the detector.
+At the signal is the applied, with an FPGA, a trapezoidal filter with its charateristics \emph{risetime} and \emph{flat top} width parameters (Moving Windows Analysis)~\cite{salathe}, this step is crucial because because the height of the peak from the differential amplifier board will be directly proportional to the energy of the incident particle in the detector.
 The height trapezoidal filter with the right parameters then gives the information on the intensity of the peak available for longer time.
 
-\subsection{Silicon detectors}
 
-Silicon is the dominant semiconductor material used in the production of
-detectors for particle physics. The moderate band gap between the conduction
-and the valence band of $1.12$ eV is large compared to the thermal
-energy at room temperature of $25.9$ meV. Therefore cooling is necessary
-only in ultra-low noise applications or when required to mitigate radiation
-damage. The detection of minimum ionizing particles (MIP) is based on
-ionisation or excitation of atoms in the medium caused by the passage of
-charged particles. The energy required to create an electron-hole (e-h) pair
-is $3.6$ eV yielding an ionization of about 80 (e-h)/$\mu$m. Thus silicon
-detector can be quite thin compared with gaseous detectors. The typical
-thickness used in high-energy physics varies between 100 and 500 $\mu$m.
+The output of the trapezoidal filter is then sampled throught the acquisition software that also control the MWA variables, the software records the amplitude of the output and saves it into different channels during the time of the acquisition. Histogram are then saved at the end, the software TKT is used to perform the fit on the peak obtained for the different pulse amplitude. 
 
-\bigbreak
+The linearity of the response of the boards is evalueted fitting the data and checking the residuals plot as in Fig.~\ref{calib:plot:1} for all the 24 channels on the board.
 
-\begin{figure}[h]
+\begin{figure}[th]
   \centering
-  \includegraphics[scale=.25]{img/depletion.png}
-  \caption{$p$-$n$ junction}
-  \label{chain}
+  \begin{minipage}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{img/first_board_line/data_2/calib_1.png}
+    \caption{Residual Plot for the the fit on the first channel on the tested board}
+    \label{calib:plot:1}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.45\textwidth}
+  \begin{tabular}{lll}
+    Voltage (V) & Channel & $\sigma$ \\
+    \midrule
+    0.2 & \num{393570.1} & 1.7 \\
+    0.3 & \num{393753.2} & 1.8 \\
+    0.4 & \num{393934.3} & 2.0 \\
+    0.6 & \num{394300.5} & 2.5 \\
+    0.8 & \num{394666.1} & 2.9 \\
+    0.9 & \num{394848.1} & 3.1 \\
+    1.2 & \num{395395.2} & 3.8 \\
+    1.4 & \num{395760.8} & 4.3 \\
+    1.5 & \num{395942.4} & 4.6 \\
+    \bottomrule
+  \end{tabular}
+  \caption{Data for the fit}
+  \label{calib:1}
+  \end{minipage}
 \end{figure}
 
-\bigbreak
-
-In intrinsic silicon there are $\sim 10^9$ free charge carriers at room
-temperature but only $\sim 2 \times 10^4$ electrons are induced by a MIP
-traversing 300 $\mu$m. Therefore a MIP signal would be lost among the large
-number of free charge carriers. The operation of silicon detectors requires
-sensors to be fully or partially depleted of free charge carriers. This can
-be achieved by using $p$-$n$ junctions operated in reverse bias. Silicon sensors
-are often fabricated on $n$-type bulk by adding a type V material, like
-phosphorus \ce{P} (donor impurity) to silicon. Donor impurities provide an
-excess of electrons charge carriers. Similarly a $p$-type material can be
-realized by adding type III material like boron \ce{B} (acceptor impurities)
-that yields an excess of holes as majority charge carriers. Typical doping
-concentration used in $n$-bulk silicon sensors are of the order of
-$1012$ cm$^{-3}$. The full depletion voltage V$_{\textup{FD}}$=D/2$\varepsilon
-\mu \zeta$ depend on the thickness D, the resistivity $\varepsilon$, the
-carrier mobility $\mu$, and the shape of the junction $\zeta$.
-
-\bigbreak
-
-\subsection{TRACE detector}
-
-The TRacking Array for light Charged particle Ejectiles (TRACE) is a silicon
-detector designed for fusion-evaporation and direct nuclear reactions.
-The material, the thickness, the segmentation and a basic geometry have been
-simply estimated by empirical considerations, while the final prototype was
-chosen among the various geometries by the simulation of their performances
-and comparison with already existing detector ancillaries (EUCLIDES, MUST2,
-TIARA).
-
-\bigbreak
-
-\begin{figure}[h]
-  \centering
-  \includegraphics[scale=.65]{img/trace_e.png}
-  \caption{TRACE detector (E configuration)}
-  \label{chain}
-\end{figure}
-
-\begin{figure}[h]
-  \centering
-  \includegraphics[scale=.65]{img/trace_de.png}
-  \caption{TRACE detector (dE configuration)}
-  \label{chain}
-\end{figure}
-
-\bigbreak
-
-Silicon, for its transparency, energy resolution, moderate cost and
-well known properties is chosen as a good compromise for the required
-applications. Based on the efficiency criterion, particles dynamics ($\sim$
-$100$ MeV for alpha particles and $25$ MeV for protons) and technological
-constraints, the thickness of the detector has been chosen to be $150$ $\mu$m
-and $1.5$ mm for the $\Delta$E and E layers respectively. The $4 \times 4$ mm
-60 pad segmentation has been established from the requirement to have a uniform
-counting rate ($20$ kHz maximum) when using high intensity beams and a good
-angular resolution ($\sim 2^\circ$), necessary to perform momentum
-discrimination in transfer reactions and a good Doppler correction. The pad
-has been preferred to the strip segmentation due the expected smaller
-electronics noise.
+All the channels gave fairly similar results, therefore confirming the linearity of the response of the electronic chain and an overral well behavior of the differential board tested.
 
 \subsection{Testing the TRACE detector}
 

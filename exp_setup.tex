@@ -1,4 +1,4 @@
-\subsection{Electronic chain linearity}
+ \subsection{Electronic chain linearity}
 
 In order to prepare the data acquistion system, the entire electronical chain
 was tested beforehand. In fact it is crucial that the response of each
@@ -64,7 +64,35 @@ All the channels gave fairly similar results, therefore confirming the linearity
 
 \subsection{Testing the TRACE detector}
 
-In order to test the TRACE detector, it was put in a vacuum chamber, with a $\alpha$-ray source.
+In order to test the TRACE detector along with its preamplifier, it was put in a vacuum chamber, with a $\alpha$-ray source (Fig.~\ref{trace_chamber}).
+
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=.05]{img/trace_chamber.jpg}
+  \caption{The TRACE detector inside the chamber along with its preamplifier boards and the alpha source.}
+  \label{trace_chamber}
+\end{figure}
+
+To connect the integrated charge-sensitive pre-amplifiers to the TRACE silicon detector prototypes a custom board was designed and realized. Each board can host 2 ASIC pre-amplificators designed by INFN Milano and University of Milano with 8 channels each. The ASICS can be reconfigured using different soldering in order to accept the back channel. As each detectors is segmented in 60 pads of 4 $mm^2$, a total of 4 pre-amplification boards are required by telescope
+The amplified signals is going out of the chamber via a flat cable connected to a FISCHER 27-pins connectors feedthrough making the bridge between the reaction chamber under vacuum ($10^{-3}$ mbar) and the laboratory. Outside of the chamber, from each FISCHER connector, the cables are divided in two 12-pins MOLEX connectors mounted on the Single-ended-to-differential modules. From here the signal goes directly to the 14-bits 100 MHz home made digitizer of the GALILEO array using MDR-26 connectors and 10 m cables.
+
+
+The acquisition is triggered by the back portion of the detector (channel 0), and is performed as in the former section. The resolution is tested using the three peaks of the source (Tab.~\ref{peaks})
+
+\begin{figure}[th]
+  \centering
+ \begin{tabular}{lc}
+    Source & $E_\alpha$ (MeV)  \\ 
+    \midrule
+    \ce{^239Pu} & 5.1566  \\
+    \ce{^241Am} & 5.4856  \\
+    \ce{^244Cm} & 5.8048 \\
+    \bottomrule
+  \end{tabular}
+  \caption{The predominant peaks from the triple-alpha source.}
+  \label{peaks}
+\end{figure}
 
 \subsection{GALTRACE experiment}
 
@@ -79,7 +107,7 @@ detector.
 
 Inside the chamber, the detectors were connected with a short cable to a
 16-channel charge-sensitive preamplifier, designed at INFN Milano~\cite{strano}.
-The preamplifier gain was $45$ mV/MeV yeliding a dynamic range of
+The preamplifier gain was $45$ mV/MeV yeilding a dynamic range of
 approximately 100 MeV. The trigger of the acquisition was the signal from the
 common electrode. The signals from one detector were sent to the digital
 acquisition, while the second detector was connected to the analog read-out

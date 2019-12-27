@@ -12,9 +12,8 @@ of the incident particle must be univocally extracted at the end of the chain.
   \label{chain}
 \end{figure}
 
-The setup used is shown in Fig.~\ref{chain}. The output of a pulse generator (\num{100}ns square pulse of variable amplitude) is fed into a Fan-in Fan-out which reproduces the same signal for 12 channels, this signals are given in input to a single-ended to differential amplifier custom board, in order to do this a cable was made.
-The output of the board as seen from the oscilloscope is shown in Fig.~\ref{osc}. The shape of the rising edge of this signal will be sampled during the acquisition from the detector in order to perform PSA on each event.
-
+The setup used is shown in Fig.~\ref{chain}. The output of a pulse generator (\num{100} ns square pulse of variable amplitude) is fed into a Fan-in Fan-out which reproduces the same signal for 12 channels. The signals are given in input to a single-ended to differential amplifier custom board. The MDR/MDR cables had to be made in the laboratory as there was not enough AGATA cables for all the channels.
+The output of the board as seen from the oscilloscope is shown in Fig.~\ref{osc}. The shape of the rising edge of the signal will be sampled during the acquisition from the detector in order to perform PSA on each event.
 
 \begin{figure}[h]
   \centering
@@ -24,11 +23,11 @@ The output of the board as seen from the oscilloscope is shown in Fig.~\ref{osc}
 \end{figure}
 
 From the board the signal is given to a 100 MHz 14-bit resolution digitizer throught a MDR-26 connector
-At the signal is the applied, with an FPGA, a trapezoidal filter with its charateristics \emph{risetime} and \emph{flat top} width parameters (Moving Windows Analysis)~\cite{salathe}, this step is crucial because because the height of the peak from the differential amplifier board will be directly proportional to the energy of the incident particle in the detector.
+The trapezoidal filter was applied to the signal through an FPGA with its charateristics \emph{risetime} and \emph{flat top} width parameters (Moving Windows Analysis)~\cite{salathe}. This step is crucial because because the height of the peak from the differential amplifier board will be directly proportional to the energy of the incident particle in the detector.
 The height trapezoidal filter with the right parameters then gives the information on the intensity of the peak available for longer time.
 
 
-The output of the trapezoidal filter is then sampled throught the acquisition software that also control the MWA variables, the software records the amplitude of the output and saves it into different channels during the time of the acquisition. Histogram are then saved at the end, the software TKT is used to perform the fit on the peak obtained for the different pulse amplitude. 
+The output of the trapezoidal filter is then sampled throught the acquisition software that also control the MWA variables. The software records the amplitude of the output and saves it into different channels during the time of the acquisition. Histogram are then saved at the end. A simple software, called TKT, is used to perform the fit on the peak obtained for the different pulse amplitude. 
 
 The linearity of the response of the boards is evalueted fitting the data and checking the residuals plot as in Fig.~\ref{calib:plot:1} for all the 24 channels on the board.
 
@@ -78,7 +77,7 @@ To connect the integrated charge-sensitive pre-amplifiers to the TRACE silicon d
 The amplified signals is going out of the chamber via a flat cable connected to a FISCHER 27-pins connectors feedthrough making the bridge between the reaction chamber under vacuum ($10^{-3}$ mbar) and the laboratory. Outside of the chamber, from each FISCHER connector, the cables are divided in two 12-pins MOLEX connectors mounted on the Single-ended-to-differential modules. From here the signal goes directly to the 14-bits 100 MHz home made digitizer of the GALILEO array using MDR-26 connectors and 10 m cables.
 
 
-The acquisition is triggered by the back portion of the detector (channel 0), and is performed as in the former section. The resolution is tested using the three peaks of the source (Tab.~\ref{peaks})
+The acquisition is triggered by the back portion of the detector (channel 0), and is performed as in the former section. The resolution is tested using the three peaks of the source (Tab.~\ref{peaks}). In Tab.~\ref{res:peaks:cab1} and Tab.~\ref{res:peaks:cab2} it is possible to see fit results for the $\alpha$ peaks for 2 different cables.
 
 \begin{figure}[th]
   \centering
@@ -94,8 +93,39 @@ The acquisition is triggered by the back portion of the detector (channel 0), an
   \label{peaks}
 \end{figure}
 
+\begin{figure}[h]
+  \centering
+  \begin{minipage}[b]{0.45\textwidth}
+    \centering
+  \begin{tabular}{ll}
+    Channel & FWHM \\
+    \midrule
+    5150 & \num{29} \\
+    5485 & \num{27} \\
+    5804 & \num{25} \\
+    \bottomrule
+  \end{tabular}
+  \caption{3-$\alpha$ peaks (cable 1)}
+  \label{res:peaks:cab1}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.45\textwidth}
+    \centering
+  \begin{tabular}{ll}
+    Channel & FWHM \\
+    \midrule
+    5153 & \num{32} \\
+    5485 & \num{27} \\
+    5805 & \num{22} \\
+    \bottomrule
+  \end{tabular}
+  \caption{3-$\alpha$ peaks (cable 2)}
+  \label{res:peaks:cab2}
+  \end{minipage}
+\end{figure}
 
-In Fig.~\ref{res} results of the calibration for different channel of the detector are shown, the result are overral good throughout all the tested channels.
+
+In Fig.~\ref{res:am}, Fig.~\ref{res:pu} and Fig.~\ref{res:cm} results of the calibration for different channel of the detector are shown. They are overral good throughout all the tested channels.
 
 \begin{figure}[h]
   \centering
@@ -107,32 +137,92 @@ In Fig.~\ref{res} results of the calibration for different channel of the detect
   \end{minipage}
   \hfill
   \begin{minipage}[b]{0.45\textwidth}
-  \begin{tabular}{lll}
-    DAQ Channel & Resolution & $\sigma$ \\
-    \midrule
-    12 & \num{0.5708} & 0.0002 \\
-    13 & \num{0.6413} & 0.0003 \\
-    14 & \num{0.6253} & 0.0003 \\
-    15 & \num{0.5535} & 0.0002 \\
-    17 & \num{0.5131} & 0.0002 \\
-    18 & \num{0.5752} & 0.0002 \\
-    19 & \num{0.6646} & 0.0003 \\
-    20 & \num{0.5854} & 0.0002 \\
-    \bottomrule
-  \end{tabular}
-  \caption{Resolution vs Channel data.}
-  \label{res:plot:am3}
+    \begin{tabular}{lll}
+      DAQ Channel & Resolution (\%) & $\sigma$ \\
+      \midrule
+      12 & \num{0.5708} & 0.0002 \\
+      13 & \num{0.6413} & 0.0003 \\
+      14 & \num{0.6253} & 0.0003 \\
+      15 & \num{0.5535} & 0.0002 \\
+      17 & \num{0.5131} & 0.0002 \\
+      18 & \num{0.5752} & 0.0002 \\
+      19 & \num{0.6646} & 0.0003 \\
+      20 & \num{0.5854} & 0.0002 \\
+      \bottomrule
+    \end{tabular}
+    \label{res:plot:am3}
   \end{minipage}
-  \caption{Energy resolution of the TRACE detector for the}
-  \label{res}
+  \caption{Energy resolution (\%) of the TRACE detector for \ce{^241Am} peak.}
+  \label{res:am}
 \end{figure}
 
+\begin{figure}[h]
+  \centering
+  \begin{minipage}[b]{0.45\textwidth}
+  \vspace{5mm}
+    \includegraphics[width=\textwidth]{img/plot/pu/3_res_pu.png}
+    %\caption{Resolution vs Channel}
+    \label{res:pu3}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.45\textwidth}
+  \begin{tabular}{lll}
+    DAQ Channel & Resolution (\%) & $\sigma$ \\
+    \midrule
+    12 & \num{0.5661} & 0.0003 \\
+    13 & \num{0.7371} & 0.0003 \\
+    14 & \num{0.5821} & 0.0003 \\
+    15 & \num{0.6160} & 0.0003 \\
+    17 & \num{0.6587} & 0.0003 \\
+    18 & \num{0.5947} & 0.0003 \\
+    19 & \num{0.6359} & 0.0003 \\
+    20 & \num{0.5228} & 0.0002 \\
+    \bottomrule
+  \end{tabular}
+  \label{res:plot:pu3}
+  \end{minipage}
+  \caption{Energy resolution (\%) of the TRACE detector for \ce{^239Pu} peak.}
+  \label{res:pu}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \begin{minipage}[b]{0.45\textwidth}
+  \vspace{5mm}
+    \includegraphics[width=\textwidth]{img/plot/cm/3_res_cm.png}
+    %\caption{Resolution vs Channel}
+    \label{res:cm3}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.45\textwidth}
+  \begin{tabular}{lll}
+    DAQ Channel & Resolution (\%) & $\sigma$ \\
+    \midrule
+    12 & \num{0.6036} & 0.0003 \\
+    13 & \num{0.7772} & 0.0004 \\
+    14 & \num{0.7342} & 0.0004 \\
+    15 & \num{0.5262} & 0.0002 \\
+    17 & \num{0.5789} & 0.0003 \\
+    18 & \num{0.5976} & 0.0002 \\
+    19 & \num{0.5472} & 0.0002 \\
+    20 & \num{0.8266} & 0.0002 \\
+    \bottomrule
+  \end{tabular}
+  \label{res:plot:cm3}
+  \end{minipage}
+  \caption{Energy resolution (\%) of the TRACE detector for \ce{^244Cm} peak.}
+  \label{res:cm}
+\end{figure}
+
+
+\clearpage
 
 \subsection{GALTRACE experiment}
 
 The experiment was performed in July 2019 at the Legnaro National Laboratory
 (Italy). A \ce{^13C} beam, with energy of $23$ MeV and intensity around $1$ pnA
-was focused on a $0.1$ mg/cm thick \ce{^19 F} -\ce{^7 Li} -\ce{^12 C} target.
+was focused on a $0.1$ mg/cm thick \ce{^19 F} -\ce{^7 Li} target, put on a base
+made of \ce{^12 C}.
 Two TRACE silicon detectors were placed inside the GALILEO HPGe array
 scattering chamber. A common electrode covered the entire ohmic side of the
 detector.
@@ -166,3 +256,55 @@ The trigger of the TRACE acquisition, obtained in this case from a digital
 leading edge discriminator embedded in the module, was the signal from the
 common electrode (“BACK”). The signals from the pads were collected only if
 the BACK signal was present.
+
+\subsection{Cabling Problem}
+
+After the data acquisition period, a problem with digitizer cabling was
+discovered. In fact the two digitizer used for the TRACE detector
+(\textit{gal09} and \textit{gal10}) did not use the same MDR cables. All the
+channels, apart from 17 to 24 ones of the \textit{gal10}, were connected through
+high-end AGATA 10m MDR/MDR cables used by previous experiment. As there were
+not enough cables, all the others channels were connected through home made
+MDR cables constructed in the LNL laboratory specifically for this experiment.
+
+\bigbreak
+
+In the Fig.~\ref{cable} it is possible to see the differences in the Pulse
+Shape of the signals from different types of cables, which are enumerated in
+the Tab.~\ref{cables}. As the analysis is made using the Pulse Shape Analysis
+(PSA), small differences in the signal propagation has to be taken into
+account when calculating the discriminating variables. In fact, as it is clear
+from the plot, the rise time and the maximum derivative of the signal will be
+different for different types of cable, thus preventing the use of the same
+cuts and the same Neural Network model for the PSA.
+
+\bigbreak
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=.16]{img/cabling.png}
+  \caption{TRACE signals from different cable type.}
+  \label{cable}
+\end{figure}
+
+\begin{figure}
+  \begin{tabular}{ll}
+    Signal Color & Cable \\
+    \midrule
+    Red & GALILEO 0.8m MDR/MDR \\
+    Blue & AGATA 10m MDR/MDR \\
+    Green & AGATA 10m MDR/MDR (previous generation 3M cable) \\
+    Magenta & Home made MDR flat cables \\
+    Black & New cable for TRACE \\
+    \bottomrule
+  \end{tabular}
+  \label{cables}
+\end{figure}
+
+\bigbreak
+
+In order to make up for this, the \textit{gal10} 17-24 channels were analyzed
+separately, making different cuts and creating a specific Neural Network model
+for those. In this way it is possible to discriminate successfully the
+protons and $\alpha$ signals also for channels connected through different MDR
+cables.

@@ -5,6 +5,8 @@ was tested beforehand. In fact it is crucial that the response of each
 electronic device used behaves linearly, as the information about the energy
 of the incident particle must be univocally extracted at the end of the chain.
 
+\bigbreak
+
 \begin{figure}[h]
   \centering
   \includegraphics[scale=.5]{img/electronic_chain_diagram.JPG}
@@ -12,8 +14,16 @@ of the incident particle must be univocally extracted at the end of the chain.
   \label{chain}
 \end{figure}
 
-The setup used is shown in Fig.~\ref{chain}. The output of a pulse generator (\num{100} ns square pulse of variable amplitude) is fed into a Fan-in Fan-out which reproduces the same signal for 12 channels. The signals are given in input to a single-ended to differential amplifier custom board. The MDR/MDR cables had to be made in the laboratory as there was not enough AGATA cables for all the channels.
+\bigbreak
+
+The setup used is shown in Fig.~\ref{chain}. The output of a pulse generator (\num{100} ns square pulse of variable amplitude) is fed into a Fan-In Fan-Out module which reproduces the same signal for 12 channels. The signals are given in input to a ASIC charge-sensitive preamplifiers, designed by the INFN of Milan electonics group \cite{charge:amp}. These CSPs are realized in MAS 350 nm BiCMOS technology \cite{bicmos}. The chip is constituted by eight channels for anodic signals and one channel for cathodic ones, separately powered. The low-power design ensured a static power consuption under 12 mW per channel and the low-noise design allows for an equivalent input noise charge in the order of 125 electrons rms with 4 pF of detector capacitance. 
+
+\bigbreak
+
+The MDR/MDR cables had to be made in the laboratory as there was not enough AGATA cables for all the channels. Cables had been soldered manually and their ground had to be checked.
 The output of the board as seen from the oscilloscope is shown in Fig.~\ref{osc}. The shape of the rising edge of the signal will be sampled during the acquisition from the detector in order to perform PSA on each event.
+
+\bigbreak
 
 \begin{figure}[h]
   \centering
@@ -22,14 +32,21 @@ The output of the board as seen from the oscilloscope is shown in Fig.~\ref{osc}
   \label{osc}
 \end{figure}
 
-From the board the signal is given to a 100 MHz 14-bit resolution digitizer throught a MDR-26 connector
-The trapezoidal filter was applied to the signal through an FPGA with its charateristics \emph{risetime} and \emph{flat top} width parameters (Moving Windows Analysis)~\cite{salathe}. This step is crucial because because the height of the peak from the differential amplifier board will be directly proportional to the energy of the incident particle in the detector.
-The height trapezoidal filter with the right parameters then gives the information on the intensity of the peak available for longer time.
+\bigbreak
 
+The signal from the preamiplifier is given to a 100 MHz 14-bit resolution digitizer throught a MDR-26 connector
+The trapezoidal filter was applied to the signal through an FPGA with its charateristics \emph{risetime} and \emph{flat top} width parameters (Moving Windows Analysis)~\cite{salathe}. This step is crucial because the height of the peak from the differential amplifier board will be directly proportional to the energy of the incident particle in the detector. In the exponential curve of the signal, the amount of the time peak is present is very small and the peak detection is made difficult. By the differentiation of the signal, it is possibile to obtain the peak precisely and thus a trapezoidal signal is obtained. 
+Hence, the height of the trapezoidal filter with the right parameters gives the information on the intensity of the peak available for longer time.
 
-The output of the trapezoidal filter is then sampled throught the acquisition software that also control the MWA variables. The software records the amplitude of the output and saves it into different channels during the time of the acquisition. Histogram are then saved at the end. A simple software, called TKT, is used to perform the fit on the peak obtained for the different pulse amplitude. 
+\bigbreak
 
-The linearity of the response of the boards is evalueted fitting the data and checking the residuals plot as in Fig.~\ref{calib:plot:1} for all the 24 channels on the board.
+The output of the trapezoidal filter is then sampled throught the acquisition software that also control the MWA variables. The software records the amplitude of the output and saves it into different channels during the time of the acquisition. A simple software, called TKT, is used to perform the fit on the peak obtained for the different pulse amplitude. 
+
+\bigbreak
+
+The linearity of the response of the boards is evalueted fitting the data obtained versus the voltage given as input to the preamplifier and checking the residuals plot as in Fig.~\ref{calib:plot:1} for all the 24 channels on the board.
+
+\bigbreak
 
 \begin{figure}[th]
   \centering
@@ -59,12 +76,13 @@ The linearity of the response of the boards is evalueted fitting the data and ch
   \end{minipage}
 \end{figure}
 
+\bigbreak
+
 All the channels gave fairly similar results, therefore confirming the linearity of the response of the electronic chain and an overral well behavior of the differential board tested.
 
 \subsection{Testing the TRACE detector}
 
 In order to test the TRACE detector along with its preamplifier, it was put in a vacuum chamber, with a $\alpha$-ray source (Fig.~\ref{trace_chamber}).
-
 
 \begin{figure}[h]
   \centering
@@ -73,11 +91,14 @@ In order to test the TRACE detector along with its preamplifier, it was put in a
   \label{trace_chamber}
 \end{figure}
 
-To connect the integrated charge-sensitive pre-amplifiers to the TRACE silicon detector prototypes a custom board was designed and realized. Each board can host 2 ASIC pre-amplificators designed by INFN Milano and University of Milano with 8 channels each. The ASICS can be reconfigured using different soldering in order to accept the back channel. As each detectors is segmented in 60 pads of 4 $mm^2$, a total of 4 pre-amplification boards are required by telescope
-The amplified signals is going out of the chamber via a flat cable connected to a FISCHER 27-pins connectors feedthrough making the bridge between the reaction chamber under vacuum ($10^{-3}$ mbar) and the laboratory. Outside of the chamber, from each FISCHER connector, the cables are divided in two 12-pins MOLEX connectors mounted on the Single-ended-to-differential modules. From here the signal goes directly to the 14-bits 100 MHz home made digitizer of the GALILEO array using MDR-26 connectors and 10 m cables.
+\bigbreak
 
+To connect the integrated charge-sensitive pre-amplifiers to the TRACE silicon detector prototypes a custom board was designed and realized. Each board can host 2 ASIC pre-amplificators with 8 channels each. The ASICS can be reconfigured using different soldering in order to accept the back channel. As each detectors is segmented in 60 pads of 4 mm$^2$, a total of 4 pre-amplification boards are required by one telescope.
+The amplified signals is going out of the chamber via a flat cable connected to a FISCHER 27-pins connectors feedthrough making the bridge between the reaction chamber under vacuum ($10^{-3}$ mbar) and the laboratory. Outside of the chamber, from each FISCHER connector, the cables are divided in two 12-pins MOLEX connectors mounted on the Single-ended-to-differential modules. From here the signal goes directly to the 14-bits 100 MHz digitizer for the GALILEO array using MDR-26 connectors and 10 m cables.
 
-The acquisition is triggered by the back portion of the detector (channel 0), and is performed as in the former section. The resolution is tested using the three peaks of the source (Tab.~\ref{peaks}). In Tab.~\ref{res:peaks:cab1} and Tab.~\ref{res:peaks:cab2} it is possible to see fit results for the $\alpha$ peaks for 2 different cables.
+\bigbreak
+
+The acquisition is triggered by the back portion of the detector, which is connected as Channel 0 of the digitizer, and it is performed as described in the former section. The resolution is tested using the three peaks of different sources (Tab.~\ref{peaks}). In Tab.~\ref{res:peaks:cab1} and Tab.~\ref{res:peaks:cab2} it is possible to see fit results for the $\alpha$ peaks for 2 different cables.
 
 \begin{figure}[th]
   \centering
@@ -124,8 +145,7 @@ The acquisition is triggered by the back portion of the detector (channel 0), an
   \end{minipage}
 \end{figure}
 
-
-In Fig.~\ref{res:am}, Fig.~\ref{res:pu} and Fig.~\ref{res:cm} results of the calibration for different channel of the detector are shown. They are overral good throughout all the tested channels.
+In Fig.~\ref{res:am}, Fig.~\ref{res:pu} and Fig.~\ref{res:cm} results of the calibration for different channels of the detector are shown. They are overral good throughout all the tested channels.
 
 \begin{figure}[h]
   \centering
@@ -213,7 +233,6 @@ In Fig.~\ref{res:am}, Fig.~\ref{res:pu} and Fig.~\ref{res:cm} results of the cal
   \caption{Energy resolution (\%) of the TRACE detector for \ce{^244Cm} peak.}
   \label{res:cm}
 \end{figure}
-
 
 \clearpage
 

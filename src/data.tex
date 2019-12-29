@@ -3,6 +3,8 @@
 The binary data from the DAQ acquisition was analyzed through a C++ code
 implemented in a ROOT framework~\cite{root}.
 
+\bigbreak
+
 The Pulse Shape Analysis (PSA) were performed directly on the binary data, as,
 by doing thus, it is not necessary to save the signal pulse as a ROOT variable
 and a further analysis can be facilitated. The \num{100} ns long stamps of the
@@ -11,6 +13,8 @@ variables, that describe fully the important features of the pulse signal for
 the proton and $\alpha$ identification: $\tau _{\textup{rise}}$ and
 $i_{\textup{max}}$, which represent, respectively, the rise time and maximum
 derivative of the signal.
+
+\bigbreak
 
 In order to calulcate the two, the following algorithms were used:
 
@@ -39,6 +43,8 @@ In order to calulcate the two, the following algorithms were used:
   \label{pulse}
 \end{figure}
 
+\bigbreak
+
 At the end, for each experimental run and each digitizer (the \textit{gal09}
 one, and the \textit{gal10}), a TTree object, called \textit{TraceEvent}, was created with the following variables:
 
@@ -63,6 +69,8 @@ filled according to the PSA: \textit{fTime} is the calculated rise time and
 \textit{fPSA} were later used as Neural Network outputs that gives the
 probability of the particle being either a proton or an alpha).
 
+\bigbreak
+
 Plots of the $\tau _{\textup{rise}}$ and $i_{\textup{max}}$ in function of the energy
 are shown in Fig.~\ref{imax} and Fig.~\ref{risetime}. The $\alpha$ and proton
 traces are clearly visible and so they can be tagged and used for the
@@ -86,3 +94,5 @@ are not known).
   \caption{An example of the $\tau _{\textup{rise}}$ vs \textit{E} graph for the 4025 run (only one channel is considered).}
   \label{risetime}
 \end{figure}
+
+\clearpage

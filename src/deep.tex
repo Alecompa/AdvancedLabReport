@@ -2,12 +2,12 @@
 With the rise of user-friendly machine learning frameworks such as TensorFlow~\cite{tensorflow} or Pytorch~\cite{pytorch}, Deep Learning had seen a wide range of applications in physics~\cite{ml4phys}. In experimental nuclear and subnuclear physics pre-trained Neural Network (NN) can be used for task such as event tagging~\cite{baldi} or inside the trigger system/acquisition chain in HEP experiments~\cite{williams}. 
 
 
-In this section an application of NNs to perform particle discrimination using the signals collected from the TRACE detector is presented. Such a technique can be used to improve data processing speed or even inside the acquisition system in future.
+In this section an application of NNs to perform particle discrimination using the signals collected from the TRACE detector is presented. Such a technique can be used to improve data processing speed or implemented in the acquisition system for the future.
 The code of the following analysis is available at~\cite{github-nn}.
 
 \subsubsection{Dataset and training}
 
-In order to train a network to discriminate between two different kinds of signals from the detector we need a dataset of labeled signals from the classes we want to distinguish. Data from the run \emph{4025} are assigned to three different classes based on cuts made in the region of the graph in Fig.~\ref{imax}, either labeled as \emph{proton}, \emph{alpha} or \emph{other}, the dataset is then balanced resulting in \num{39000} labeled input signals to train the network, \num{13000} for each class. Examples of signals are shown in Fig.~\ref{input}.
+In order to train a network to discriminate between two different kinds of signals from the detector we need a dataset of labeled signals from the classes we want to distinguish. Data from the run \emph{4025} are assigned to three different classes based on cuts made in the region of the graph in Fig.~\ref{imax}, either labeled as \emph{proton}, \emph{alpha} or \emph{other}. The dataset is then balanced resulting in \num{39000} labeled input signals to train the network, \num{13000} for each class. Examples of signals are shown in Fig.~\ref{input}.
 
 \begin{figure}[htb]
   \centering
@@ -40,7 +40,7 @@ The dataset is split into the actual training data (\num{90}\%) and a set for va
 	\item Output layer (\emph{softmax} activation, 3 classes).
 \end{itemize}
 
-The training is performed optimizing a Mean Squared Error (MSE) function for the labels using the \emph{Adamax} optimizer. Data are given in batches of 200 samples, over several ($\sim 30$) epochs of training. At the end is possible use the model on data from other run to classify events from other run.
+The training is performed optimizing a Mean Squared Error (MSE) function for the labels using the \emph{Adamax} optimizer. Data are given in batches of 200 samples, over several ($\sim 30$) epochs of training. At the end is possible use the model on data from other runs to try to classify it.
 
 \subsubsection{Validation and Application of the model}
 
@@ -66,12 +66,12 @@ Using the data from the calibration run an accuracy of $\sim\num{67} \%$ is achi
   \label{conf_alpha}
   \end{minipage}
   \caption{Confusion matrices for the two datasets.}
-  \label{input}
+  \label{input:deep}
 \end{figure}
 
 At the end of the validation the trained model is exported and implemented into a C++ program that merges the data of the previous trees with the output of the neural network. This two new entries should be interpreted as probabilities of the particle being an proton or alpha in the energy range of the particles which stop into the $\Delta E$ detector (below $\sim \num{4}/\num{6}$ MeV). 
 
-The final ROOT TTree is complete of the data from the GALILEO detector array and can be used to look for coincidence between the emitted particles from the compounds formed and $\gamma$'s emitted from the disexcitation of the resulting nuclei.
+The final ROOT TTree include the data from the GALILEO detector array. It can be used to look for coincidence between the evaporation residues from the daughter nuclei formed and $\gamma$'s emitted from the their disexcitation.
 
 
 

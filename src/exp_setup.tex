@@ -9,14 +9,20 @@ of the incident particle must be univocally extracted at the end of the chain.
 
 \begin{figure}[h]
   \centering
-  \includegraphics[scale=.5]{img/electronic_chain_diagram.JPG}
+  \includegraphics[scale=.6]{img/electronic_chain_diagram.JPG}
   \caption{The electronic chain}
   \label{chain}
 \end{figure}
 
 \bigbreak
 
-The setup used is shown in Fig.~\ref{chain}. The output of a pulse generator (\num{100} ns square pulse of variable amplitude) is fed into a Fan-In Fan-Out module which reproduces the same signal for 12 channels. The signals are given in input to a ASIC charge-sensitive preamplifiers, designed by the INFN of Milan electonics group \cite{charge:amp}. These CSPs are realized in MAS 350 nm BiCMOS technology \cite{bicmos}. The chip is constituted by eight channels for anodic signals and one channel for cathodic ones, separately powered. The low-power design ensured a static power consuption under 12 mW per channel and the low-noise design allows for an equivalent input noise charge in the order of 125 electrons rms with 4 pF of detector capacitance. 
+The setup used is shown in Fig.~\ref{chain}. The output of a pulse generator (\num{100} ns square pulse of variable amplitude) is fed into a Fan-In Fan-Out module which reproduces the same signal for 12 channels. The signals are given in
+to the single-ended-to-differential (SeDiff) modules, which allows for long
+connections to the digitizers rack. The SeDiff modules are built around the
+AD8139 integrated operational amplifier and convert the single-ended signals
+in differential ones. These boards have been designed at the INFN LNL and are
+compliant with the preamplifier standards in terms of dynamic range, bandwidth
+and noise.
 
 \bigbreak
 
@@ -34,8 +40,8 @@ The output of the board as seen from the oscilloscope is shown in Fig.~\ref{osc}
 
 \bigbreak
 
-The signal from the preamiplifier is given to a 100 MHz 14-bit resolution digitizer throught a MDR-26 connector
-The trapezoidal filter was applied to the signal through an FPGA with its charateristics \emph{risetime} and \emph{flat top} width parameters (Moving Windows Analysis)~\cite{salathe}. This step is crucial because the height of the peak from the differential amplifier board will be directly proportional to the energy of the incident particle in the detector. In the exponential curve of the signal, the amount of the time peak is present is very small and the peak detection is made difficult. By the differentiation of the signal, it is possibile to obtain the peak precisely and thus a trapezoidal signal is obtained. 
+The signal from the preamiplifier is given to a 100 MHz 14-bit resolution digitizer throught a MDR-26 connector.
+The trapezoidal filter was applied to the signal through an FPGA with its charateristics \emph{rise time} and \emph{flat top width} parameters (Moving Windows Analysis)~\cite{salathe}. This step is crucial because the height of the peak from the differential amplifier board will be directly proportional to the energy of the incident particle in the detector. In the exponential curve of the signal, the amount of the time peak is present is very small and the peak detection is made difficult. By the differentiation of the signal, it is possibile to obtain the peak precisely and thus a trapezoidal signal is obtained. 
 Hence, the height of the trapezoidal filter with the right parameters gives the information on the intensity of the peak available for longer time.
 
 \bigbreak
@@ -239,7 +245,7 @@ In Fig.~\ref{res:am}, Fig.~\ref{res:pu} and Fig.~\ref{res:cm} results of the cal
 \subsection{GALTRACE experiment}
 
 The experiment was performed in July 2019 at the Legnaro National Laboratory
-(Italy). A \ce{^13C} beam, with energy of $23$ MeV and intensity around $1$ pnA
+(Italy) \cite{kuba:compa}. A \ce{^13C} beam, with energy of $23$ MeV and intensity around $1$ pnA
 was focused on a $0.1$ mg/cm thick \ce{^19 F} -\ce{^7 Li} target, put on a base
 made of \ce{^12 C}.
 Two TRACE silicon detectors were placed inside the GALILEO HPGe array
@@ -265,9 +271,7 @@ was chosen to assure recording the full rise time on the one hand and at the
 same time minimize the amount of written data. The signals were recorded,
 digitized and afterwards processed to extract the relevant observables. The
 placement of the TRACE module in the chamber with the ohmic side facing the
-reaction products was important to enhance the PSA capability. The signals
-were collected both from the ohmic side of the detector as well as from a few
-groups of pads (or single pads).
+reaction products was important to enhance the PSA capability.
 
 \bigbreak
 
@@ -317,6 +321,7 @@ cuts and the same Neural Network model for the PSA.
     Black & New cable for TRACE \\
     \bottomrule
   \end{tabular}
+  \caption{Legend for Fig.~\ref{cable}.}
   \label{cables}
 \end{figure}
 

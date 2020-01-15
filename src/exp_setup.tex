@@ -16,8 +16,8 @@ of the incident particle must be univocally extracted at the end of the chain.
 
 \bigbreak
 
-The setup used is shown in Fig.~\ref{chain}. The output of a pulse generator (\num{100} ns square pulse of variable amplitude) is fed into a Fan-In Fan-Out module which reproduces the same signal for 12 channels. The signals are given in
-to the single-ended-to-differential (SeDiff) modules, which allows for long
+The setup used is shown in Fig.~\ref{chain}. The output of a pulse generator (\num{100} ns square pulse of variable amplitude) is fed into a Fan-In Fan-Out module which reproduces the same signal for 12 channels. The signals are transmitted
+to the single-ended-to-differential (SeDiff) modules, which permit long
 connections to the digitizers rack. The SeDiff modules are built around the
 AD8139 integrated operational amplifier and convert the single-ended signals
 in differential ones. These boards have been designed at the INFN LNL and are
@@ -26,8 +26,7 @@ and noise.
 
 \bigbreak
 
-The MDR/MDR cables had to be made in the laboratory as there was not enough AGATA cables for all the channels. Cables had been soldered manually and their ground had to be checked.
-The output of the board as seen from the oscilloscope is shown in Fig.~\ref{osc}. The shape of the rising edge of the signal will be sampled during the acquisition from the detector in order to perform PSA on each event.
+
 
 \bigbreak
 
@@ -40,9 +39,9 @@ The output of the board as seen from the oscilloscope is shown in Fig.~\ref{osc}
 
 \bigbreak
 
-The signal from the preamiplifier is given to a 100 MHz 14-bit resolution digitizer throught a MDR-26 connector.
-The trapezoidal filter was applied to the signal through an FPGA with its charateristics \emph{rise time} and \emph{flat top width} parameters (Moving Windows Analysis)~\cite{salathe}. This step is crucial because the height of the peak from the differential amplifier board will be directly proportional to the energy of the incident particle in the detector. In the exponential curve of the signal, the amount of the time peak is present is very small and the peak detection is made difficult. By the differentiation of the signal, it is possibile to obtain the peak precisely and thus a trapezoidal signal is obtained. 
-Hence, the height of the trapezoidal filter with the right parameters gives the information on the intensity of the peak available for longer time.
+The signal from the pre-amiplifier is given to a 100 MHz 14-bit resolution digitizer throught a MDR-26 connector.
+The trapezoidal filter was applied to the signal through an FPGA with its charateristics \emph{rise time} and \emph{flat top width} parameters (Moving Windows Analysis)~\cite{salathe}. This step is crucial because the height of the peak from the pre-amplifier board will be directly proportional to the energy of the incident particle in the detector. In the exponential curve of the signal, the amount of the time peak is present is very small and the peak detection is made difficult. By the differentiation of the signal, it is possibile to obtain the peak precisely and thus a trapezoidal signal is obtained. 
+Hence, the height of the trapezoidal filter with the right parameters gives the information on the maximum of the peak available for longer time.
 
 \bigbreak
 
@@ -50,14 +49,14 @@ The output of the trapezoidal filter is then sampled throught the acquisition so
 
 \bigbreak
 
-The linearity of the response of the boards is evalueted fitting the data obtained versus the voltage given as input to the preamplifier and checking the residuals plot as in Fig.~\ref{calib:plot:1} for all the 24 channels on the board.
+The linearity of the response of the boards is checked fitting the data obtained versus the voltage given as input to the preamplifier and checking the residuals plot as in Fig.~\ref{calib:plot:1} for all the 24 channels on the board.
 
 \bigbreak
 
 \begin{figure}[th]
   \centering
   \begin{minipage}[b]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{img/first_board_line/data_2/calib_1.png}
+    \includegraphics[width=\textwidth]{img/fourth_board_line/data_1/calib_0.png}
     \caption{Residual Plot for the the fit on the first channel on the tested board}
     \label{calib:plot:1}
   \end{minipage}
@@ -66,15 +65,15 @@ The linearity of the response of the boards is evalueted fitting the data obtain
   \begin{tabular}{lll}
     Voltage (V) & Channel & $\sigma$ \\
     \midrule
-    0.2 & \num{393570.1} & 1.7 \\
-    0.3 & \num{393753.2} & 1.8 \\
-    0.4 & \num{393934.3} & 2.0 \\
-    0.6 & \num{394300.5} & 2.5 \\
-    0.8 & \num{394666.1} & 2.9 \\
-    0.9 & \num{394848.1} & 3.1 \\
-    1.2 & \num{395395.2} & 3.8 \\
-    1.4 & \num{395760.8} & 4.3 \\
-    1.5 & \num{395942.4} & 4.6 \\
+    0.2 & \num{343.1} & 1.9 \\
+    0.3 & \num{519.5} & 2.1 \\
+    0.4 & \num{695.4} & 2.2 \\
+    0.6 & \num{1049.5} & 2.6 \\
+    0.8 & \num{1403.0} & 3.0 \\
+    0.9 & \num{1579.8} & 3.2 \\
+    1.2 & \num{2109.6} & 3.9 \\
+    1.4 & \num{2462.4} & 4.4 \\
+    1.5 & \num{2639.5} & 4.5 \\
     \bottomrule
   \end{tabular}
   \caption{Data for the fit}
@@ -84,11 +83,66 @@ The linearity of the response of the boards is evalueted fitting the data obtain
 
 \bigbreak
 
-All the channels gave fairly similar results, therefore confirming the linearity of the response of the electronic chain and an overral well behavior of the differential board tested.
+All the channels gave fairly similar results, therefore confirming the linearity of the response of the electronic chain and a good behavior of the differential board tested.
+
+\subsubsection{Cabling Problem}
+
+After the data acquisition period, a problem with digitizer cabling was
+discovered. In fact the two digitizer used for the TRACE detector
+(\textit{gal09} and \textit{gal10}) did not use the same MDR cables. All the
+channels, apart from 17 to 24 ones of the \textit{gal10}, were connected through
+high-end AGATA 10m MDR/MDR cables used by previous experiment. As there were
+not enough cables, all the others channels were connected through home made
+MDR cables constructed in the LNL laboratory specifically for this experiment.
+
+\bigbreak
+
+In the Fig.~\ref{cable} it is possible to see the differences in the Pulse
+Shape of the signals from different types of cables, which are enumerated in
+the Tab.~\ref{cables}. As the analysis is made using the Pulse Shape Analysis
+(PSA), small differences in the signal propagation has to be taken into
+account when calculating the discriminating variables. In fact, as it is clear
+from the plot, the rise time and the maximum derivative of the signal will be
+different for different types of cable, thus preventing the use of the same
+cuts and the same Neural Network model for the PSA.
+
+\bigbreak
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=.16]{img/cabling.png}
+  \caption{TRACE signals from different cable type.}
+  \label{cable}
+\end{figure}
+
+\begin{figure}[h]
+  \begin{tabular}{ll}
+    Signal Color & Cable \\
+    \midrule
+    Red & GALILEO 0.8m MDR/MDR \\
+    Blue & AGATA 10m MDR/MDR \\
+    Green & AGATA 10m MDR/MDR (previous generation 3M cable) \\
+    Magenta & Home made MDR flat cables \\
+    Black & New cable for TRACE \\
+    \bottomrule
+  \end{tabular}
+  \caption{Legend for Fig.~\ref{cable}.}
+  \label{cables}
+\end{figure}
+
+\bigbreak
+
+In order to make up for this, the \textit{gal10} 17-24 channels were analyzed
+separately, making different cuts and creating a specific Neural Network model
+for those. In this way it is possible to discriminate successfully the
+protons and $\alpha$ signals also for channels connected through different MDR
+cables.
+
+\clearpage
 
 \subsection{Testing the TRACE detector}
 
-In order to test the TRACE detector along with its preamplifier, it was put in a vacuum chamber, with a $\alpha$-ray source (Fig.~\ref{trace_chamber}).
+In order to test the TRACE detector along with its preamplifier, it was put in a vacuum chamber, with a $\alpha$ source (Fig.~\ref{trace_chamber}).
 
 \begin{figure}[h]
   \centering
@@ -125,7 +179,7 @@ The acquisition is triggered by the back portion of the detector, which is conne
   \begin{minipage}[b]{0.45\textwidth}
     \centering
   \begin{tabular}{ll}
-    Channel & FWHM \\
+    Energy (keV) & FWHM (keV) \\
     \midrule
     5150 & \num{29} \\
     5485 & \num{27} \\
@@ -139,7 +193,7 @@ The acquisition is triggered by the back portion of the detector, which is conne
   \begin{minipage}[b]{0.45\textwidth}
     \centering
   \begin{tabular}{ll}
-    Channel & FWHM \\
+    Energy (keV) & FWHM (keV) \\
     \midrule
     5153 & \num{32} \\
     5485 & \num{27} \\
@@ -245,22 +299,12 @@ In Fig.~\ref{res:am}, Fig.~\ref{res:pu} and Fig.~\ref{res:cm} results of the cal
 \subsection{GALTRACE experiment}
 
 The experiment was performed in July 2019 at the Legnaro National Laboratory
-(Italy) \cite{kuba:compa}. A \ce{^13C} beam, with energy of $23$ MeV and intensity around $1$ pnA
-was focused on a $0.1$ mg/cm thick \ce{^19 F} -\ce{^7 Li} target, put on a base
-made of \ce{^12 C}.
-Two TRACE silicon detectors were placed inside the GALILEO HPGe array
-scattering chamber. A common electrode covered the entire ohmic side of the
-detector.
-
-\bigbreak
-
-Inside the chamber, the detectors were connected with a short cable to a
+(Italy) \cite{kuba:compa}. A \ce{^13C} beam, with an energy of $23$ MeV and an
+intensity around $1$ pnA was directed on a $0.1$ mg/cm thick \ce{^19 F} -
+\ce{^7 Li} target (on a \ce{^12 C} substrate). Two TRACE silicon detectors
+were placed inside the GALILEO HPGe array scattering chamber. Inside the
+chamber, the detectors were connected with a short cable to a
 16-channel charge-sensitive preamplifier, designed at INFN Milano~\cite{strano}.
-The preamplifier gain was $45$ mV/MeV yeilding a dynamic range of
-approximately 100 MeV. The trigger of the acquisition was the signal from the
-common electrode. The signals from one detector were sent to the digital
-acquisition, while the second detector was connected to the analog read-out
-line.
 
 \bigbreak
 
@@ -280,55 +324,3 @@ leading edge discriminator embedded in the module, was the signal from the
 common electrode (“BACK”). The signals from the pads were collected only if
 the BACK signal was present.
 
-\subsection{Cabling Problem}
-
-After the data acquisition period, a problem with digitizer cabling was
-discovered. In fact the two digitizer used for the TRACE detector
-(\textit{gal09} and \textit{gal10}) did not use the same MDR cables. All the
-channels, apart from 17 to 24 ones of the \textit{gal10}, were connected through
-high-end AGATA 10m MDR/MDR cables used by previous experiment. As there were
-not enough cables, all the others channels were connected through home made
-MDR cables constructed in the LNL laboratory specifically for this experiment.
-
-\bigbreak
-
-In the Fig.~\ref{cable} it is possible to see the differences in the Pulse
-Shape of the signals from different types of cables, which are enumerated in
-the Tab.~\ref{cables}. As the analysis is made using the Pulse Shape Analysis
-(PSA), small differences in the signal propagation has to be taken into
-account when calculating the discriminating variables. In fact, as it is clear
-from the plot, the rise time and the maximum derivative of the signal will be
-different for different types of cable, thus preventing the use of the same
-cuts and the same Neural Network model for the PSA.
-
-\bigbreak
-
-\begin{figure}[h]
-  \centering
-  \includegraphics[scale=.16]{img/cabling.png}
-  \caption{TRACE signals from different cable type.}
-  \label{cable}
-\end{figure}
-
-\begin{figure}
-  \begin{tabular}{ll}
-    Signal Color & Cable \\
-    \midrule
-    Red & GALILEO 0.8m MDR/MDR \\
-    Blue & AGATA 10m MDR/MDR \\
-    Green & AGATA 10m MDR/MDR (previous generation 3M cable) \\
-    Magenta & Home made MDR flat cables \\
-    Black & New cable for TRACE \\
-    \bottomrule
-  \end{tabular}
-  \caption{Legend for Fig.~\ref{cable}.}
-  \label{cables}
-\end{figure}
-
-\bigbreak
-
-In order to make up for this, the \textit{gal10} 17-24 channels were analyzed
-separately, making different cuts and creating a specific Neural Network model
-for those. In this way it is possible to discriminate successfully the
-protons and $\alpha$ signals also for channels connected through different MDR
-cables.
